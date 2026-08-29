@@ -37,7 +37,7 @@ function Show-TuiMenu {
 # --- Configuration Phase ---
 $GithubAccount = "koteczekp"
 
-# Get script filename (e.g., "Gitploy" or "OrbitalFronts")
+# Get script filename
 $DefaultName = if ($PSCommandPath) { 
     [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath) 
 } else { 
@@ -83,7 +83,7 @@ if ([string]::IsNullOrWhiteSpace($CommitMsg)) { $CommitMsg = "Initial commit" }
 
 # --- Execution Phase ---
 Clear-Host
-Write-Host "🚀 Publishing to '$GithubAccount/$RepoName'..." -ForegroundColor Cyan
+Write-Host "[*] Publishing to '$GithubAccount/$RepoName'..." -ForegroundColor Cyan
 
 git config --global http.postBuffer 1048576000
 git config --global core.compression 0
@@ -128,7 +128,7 @@ Write-Host "-> Pushing to GitHub..." -ForegroundColor DarkGray
 git push -u origin main
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "`n✅ Successfully published to https://github.com/$GithubAccount/$RepoName" -ForegroundColor Green
+    Write-Host "`n[SUCCESS] Successfully published to https://github.com/$GithubAccount/$RepoName" -ForegroundColor Green
 } else {
-    Write-Host "`n❌ Push failed. Read the red error message from Git above." -ForegroundColor Red
+    Write-Host "`n[ERROR] Push failed. Read the red error message from Git above." -ForegroundColor Red
 }
